@@ -1,0 +1,89 @@
+-- To create a database
+CREATE DATABASE record_company;
+-- The use is to switch to a specific database 
+USE record_company;
+-- To create a table
+CREATE TABLE test (
+	test_column INT
+);
+-- alter keyword to access a already created table and Add keyword to add another column to a table
+alter table test add another_column varchar(255);
+
+-- keyword drop to drop a database 
+drop table test;
+
+-- auto_increment to auto generate id and not null not to allow any null value
+--  and primary key a unique identifier while varchar and int are datatypes 
+create table bands (
+	id int not null auto_increment,
+    name varchar(255) not null,
+    primary key(id)
+);
+-- A foreign key (FK) is a column or combination of columns that is used to establish and enforce a link 
+-- between the data in two tables to control the data that can be stored in the foreign key table
+-- and the reference key word is used to parent table
+create table albums (
+id int not null auto_increment,
+name varchar(255) not null,
+release_year int,
+band_id int not null,
+primary key(id),
+foreign key(band_id) references bands(id)
+);
+
+-- to insert values into the band table 
+insert into bands (name) values ('Iron maiden'), ('Deuce'), ('Avenged sevenfolds'), ('Ankor');
+
+-- to show all the values in the band table 
+select * from bands;
+
+-- limit 2 to show the first two values in the table 
+select * from bands limit 2;
+
+-- to get only the names in the band
+select name from bands;
+
+-- to rename the names in the the table with as
+select id as 'ID', name as 'Band Name' from bands; 
+
+-- order by to order table in asc order 
+select * from bands order by name asc;
+-- order by to order table in desc order 
+select * from bands order by name desc;
+
+-- to insert values into the album 
+insert into albums(name, release_year, band_id)
+values('The number of the beast', 1985, 1),
+('power of slaves', 2002, 1),
+('Nightmare', 2018, 2),
+('Nightmare', 2010, 3),
+('Test album', Null, 3); 
+
+select * from albums;
+
+-- distinct to remove duplicated values and show only unique names 
+select distinct name from albums;
+
+-- to update the data where id = 7
+update albums 
+set release_year = 1982
+where id = 7;
+
+
+select * from albums where release_year < 2000;
+
+select * from albums where name like '%er%' or band_id = 2; 
+
+select * from albums where release_year = 2010 and band_id = 3;
+
+select * from albums where release_year between 2000 and 2019;
+
+
+
+
+
+
+
+
+
+
