@@ -120,8 +120,21 @@ create table contact(
     primary key(college_id)
 );
 
-select stud_id, inst_name, city, technology, cellphone 
-from student join technologies using (stud_id) join contact order by tech_id;
+-- aggregrate function 
+-- avg()
+-- sum()
+-- count()
+select count(release_year) from albums;
+
+select band_id, count(band_id) from albums group by band_id; 
+
+select * from albums;
+
+select b.name as band_name, count(a.id) as num_albums
+from bands as b
+-- where b.name = 'deuce'
+left join albums as a on b.id = a.band_id group by b.id
+having num_albums = 1; 
 
 
 
