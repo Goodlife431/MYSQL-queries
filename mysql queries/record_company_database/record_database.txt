@@ -79,6 +79,49 @@ select * from albums where release_year = 2010 and band_id = 3;
 select * from albums where release_year between 2000 and 2019;
 
 
+select * from albums where release_year is null;
+
+select * from albums;
+
+delete from albums where id = 11;
+
+select * from bands 
+inner join albums on bands.id = albums.band_id;
+
+create table student(
+	stud_id int not null auto_increment,
+    stud_fname varchar(255) not null,
+    stud_lname varchar(255) not null,
+    city varchar(255) not null,
+    primary key(stud_id)
+);
+
+create table technologies(
+	stud_id int not null auto_increment,
+    tech_id int not null, 
+    inst_name varchar(255) not null,
+    technology varchar(255) not null,
+    primary key (stud_id),
+    foreign key(tech_id) references technologies(stud_id)
+);
+
+select student.stud_fname, student.stud_lname, student.city, technologies.technology
+from student join technologies on student.stud_id = technologies.tech_id;
+
+select student.stud_id, technologies.inst_name, student.city, technologies.technology
+from student join technologies on student.stud_id = technologies.tech_id;
+
+select tech_id, inst_name, city, technology from student join technologies using(stud_id) where technology= "java";
+
+create table contact(
+	college_id int not null auto_increment,
+    cellphone int not null,
+    Telephone int not null,
+    primary key(college_id)
+);
+
+select stud_id, inst_name, city, technology, cellphone 
+from student join technologies using (stud_id) join contact order by tech_id;
 
 
 
